@@ -66,6 +66,10 @@ Run from the project root so `public/` resolves for static files.
 
 Step-by-step guide (Postgres, Redis, OIDC env vars, custom domain, troubleshooting): **[docs/railway-deploy.md](docs/railway-deploy.md)**.
 
+## Deploy on Digital Ocean
+
+This repo cannot deploy itself to your account; use **[docs/digitalocean-deploy.md](docs/digitalocean-deploy.md)** (App Platform or Droplet + Docker). Example App Platform spec: **[docs/digitalocean-app-spec.example.yaml](docs/digitalocean-app-spec.example.yaml)**.
+
 ## Environment variables
 
 See `.env.example`. Important keys:
