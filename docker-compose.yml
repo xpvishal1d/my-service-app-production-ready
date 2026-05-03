@@ -1,0 +1,25 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: my-service-app-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: my_service_app
+    ports:
+      - "5433:5432"
+    volumes:
+      - my_service_app_pgdata:/var/lib/postgresql/data
+
+  valkey:
+    image: valkey/valkey:8-alpine
+    container_name: my-service-app-valkey
+    ports:
+      - "6379:6379"
+    volumes:
+      - my_service_app_valkeydata:/data
+    command: ["valkey-server", "--appendonly", "yes"]
+
+volumes:
+  my_service_app_pgdata:
+  my_service_app_valkeydata:

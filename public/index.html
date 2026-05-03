@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Checkbox Grid — Real-time</title>
+    <link rel="stylesheet" href="/css/app.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div>
+        <h1>Million-checkbox grid</h1>
+        <p class="muted">
+          Logged-in users can toggle; anonymous visitors see live updates only (read-only).
+        </p>
+      </div>
+      <div class="actions">
+        <span id="auth-status" class="pill">Loading…</span>
+        <a id="login-link" class="btn" href="/login">Login</a>
+        <button id="logout-btn" type="button" class="btn hidden" hidden>Logout</button>
+      </div>
+    </header>
+
+    <div id="rate-limit-banner" class="rate-banner hidden" role="alert"></div>
+
+    <section class="stats">
+      <div><strong id="grid-size">—</strong><span class="muted"> cells</span></div>
+      <div><strong id="ws-status">Offline</strong><span class="muted"> WebSocket</span></div>
+      <div><strong id="conn-count">—</strong><span class="muted"> connections (this server)</span></div>
+    </section>
+
+    <div id="viewport" class="viewport" tabindex="0" aria-label="Checkbox grid viewport">
+      <div id="canvas" class="canvas"></div>
+    </div>
+
+    <p class="hint muted">
+      Scroll to explore. Only visible cells are rendered. Refresh reloads bitmap state from the API, then live
+      updates resume over the socket.
+    </p>
+
+    <script src="/js/app.js" defer></script>
+  </body>
+</html>
