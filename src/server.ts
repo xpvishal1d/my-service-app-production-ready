@@ -449,6 +449,11 @@ const server = http.createServer(app);
 
 attachCheckboxWs(server);
 
-server.listen(env.PORT, () => {
-  console.log(`my-service-app listening on ${env.APP_BASE_URL}`);
-});
+server
+  .listen(env.PORT, () => {
+    console.log(`my-service-app listening on port ${env.PORT} (APP_BASE_URL=${env.APP_BASE_URL})`);
+  })
+  .on("error", (err) => {
+    console.error("Failed to bind HTTP server:", err);
+    process.exit(1);
+  });

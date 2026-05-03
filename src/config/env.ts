@@ -36,4 +36,14 @@ const envSchema = z.object({
   AUTH_SCOPES: z.string().min(1)
 });
 
-export const env = envSchema.parse(process.env);
+const parsed = envSchema.safeParse(process.env);
+if (!parsed.success) {
+  console.error("Environment validation failed (fix these in your host / App Platform env):");
+  for (const issue of parsed.error.issues) {
+    const path = issue.path.length ? issue.path.join(".") : "(root)";
+    console.error(`  - ${path}: ${issue.message}`);
+  }
+  process.exit(1);
+}
+
+export const env = parsed.data;
