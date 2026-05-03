@@ -1,6 +1,22 @@
 import "dotenv/config";
 import { z } from "zod";
 
+/**
+ * Host UIs often create keys with an empty value. For optional fields (and PORT defaults),
+ * an empty string should behave like "unset".
+ */
+const EMPTY_UNSET_KEYS = ["INSTANCE_ID", "AUTH_REVOKE_ENDPOINT", "PORT"] as const;
+
+function sanitizedProcessEnv(): NodeJS.ProcessEnv {
+  const out: NodeJS.ProcessEnv = { ...process.env };
+  for (const key of EMPTY_UNSET_KEYS) {
+    if (out[key] === "") {
+      delete out[key];
+    }
+  }
+  return out;
+}
+
 const envSchema = z.object({
   NODE_ENV: z.enum(["development", "test", "production"]).default("development"),
   PORT: z.coerce.number().default(4000),
@@ -36,7 +52,7 @@ const envSchema = z.object({
   AUTH_SCOPES: z.string().min(1)
 });
 
-const parsed = envSchema.safeParse(process.env);
+const parsed = envSchema.safeParse(sanitizedProcessEnv());
 if (!parsed.success) {
   console.error("Environment validation failed (fix these in your host / App Platform env):");
   for (const issue of parsed.error.issues) {
