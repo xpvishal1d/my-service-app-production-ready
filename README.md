@@ -62,6 +62,10 @@ pnpm start
 
 Run from the project root so `public/` resolves for static files.
 
+## Deploy on Railway (with `accounts.xpvishal.dev` auth)
+
+Step-by-step guide (Postgres, Redis, OIDC env vars, custom domain, troubleshooting): **[docs/railway-deploy.md](docs/railway-deploy.md)**.
+
 ## Environment variables
 
 See `.env.example`. Important keys:
