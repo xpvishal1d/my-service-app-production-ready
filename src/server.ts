@@ -76,10 +76,14 @@ function cookieOptions(maxAgeMs: number) {
 async function createSession() {
   const sessionId = randomToken(32);
   const expiresAt = new Date(Date.now() + env.SESSION_TTL_DAYS * 24 * 60 * 60 * 1000);
+  const now = new Date();
 
   await db.insert(appSessions).values({
     id: sessionId,
-    expiresAt
+    expiresAt,
+    isAuthenticated: false,
+    createdAt: now,
+    updatedAt: now
   });
 
   return { sessionId, expiresAt };
