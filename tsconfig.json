@@ -12,5 +12,5 @@
     "forceConsistentCasingInFileNames": true,
     "types": ["node"]
   },
-  "include": ["src", "drizzle.config.js"]
+  "include": ["src", "drizzle.config.ts"]
 }
